@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Title</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/stylesheets/foundation.min.css" />
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css" /> -->
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css" /> -->
+    {{{block "stylesheets"}}}
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.stackmob.com/js/json2-min.js"></script>
+    <script type="text/javascript" src="http://static.stackmob.com/js/underscore-1.4.1-min.js"></script>
+    <script type="text/javascript" src="http://static.stackmob.com/js/backbone-0.9.2-min.js"></script>
+    <script type="text/javascript" src="http://static.stackmob.com/js/stackmob-js-0.7.0-min.js"></script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script>
+    <!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script> -->
+
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/views.js"></script>
+    <!-- <script type="text/javascript" src="/controller.js"></script> -->
+
+    <script type="text/javascript">
+      StackMob.init({
+        appName: "ten",
+        clientSubdomain: "junirokgmailcom",
+        publicKey: "75c4ebdf-1e15-4a04-9511-cfcfe61dc4f9",
+        apiVersion: 0
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        App = new AppRouter();
+        Backbone.history.start();
+      });
+    </script>
+
+    <script type="text/template" id="item-home">
+      <div class="container">
+        <div class="row">
+          <div class="seven columns centered">
+            <div class="row collapse">
+              <div class="ten mobile-three columns">
+                <input type="text" placeholder="Search by Course Code or Course Name" />
+              </div>
+              <div class="two mobile-one columns">
+                <a class="button expand postfix">Search</a>
+              </div>
+            </div>
+            <a href="#!/search/">Advanced Search</a>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="row">
+          <div class="six columns panel centered">
+            <h4 class="subheader">Top Rated Courses</h4>
+            <ul class="disc">
+              <li><a href="#">ECSE 428 - Software Engineering Practice</a></li>
+              <li><a href="#">ECSE 323 - Digital System Design</a></li>
+              <li><a href="#">SOCI 209 - Anthropology of Religion</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="item-login">
+      <div class="container">
+        <div class="four columns centered">
+          <form class="form-signin">
+            <h2 class="subheader">Please sign in</h2>
+            <input type="text" class="input-block-level" placeholder="Username">
+            <input type="password" class="input-block-level" placeholder="Password">
+            <button class="button" type="submit">Sign in</button>
+            <p>
+              <a href="/#/forgot">Forgot Password</a>
+              <br/>
+              <a href="/#!/register">Register</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="item-register">
+      <div class="row">
+        <div class="six columns centered">
+          <h2 class="subheader">Register</h2>
+          <form>
+            <fieldset>
+              <div class="row">
+
+                  <div class="row">
+                    <div class="six columns">
+                      <input type="text" placeholder="First Name" />
+                    </div>
+                    <div class="six columns">
+                      <input type="text" placeholder="Last Name" />
+                    </div>
+                  </div>
+
+                  <input type="text" placeholder="Email">
+
+                  <input type="text" placeholder="Username">
+
+                  <input type="text" placeholder="Password">
+                  <input type="text" placeholder="Retype Password">
+              </div>
+            </fieldset>
+            <span>By clicking to register you agree to the <a href="#!/terms">terms of agreement</a></span><br><br>
+            <button class="button" type="submit">Register</button>
+            <a href="/" class="button" type="submit">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </script>
+  </head>
+
+  <body>
+    {{{body}}}
+    <nav class="top-bar">
+      <ul>
+        <li class="name"><h1><a href="/">RateMyCourses</a></h1></li>
+        <li class="toggle-topbar"><a href="/"></a></li>
+      </ul>
+      <section>
+        <ul class="left">
+          <li><a href="#">Find a Course</a></li>
+        </ul>
+
+        <ul class="right">
+          <li><a href="#!/login">Login</a></li>
+          <li><a href="#!/register">Register</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <section id="main" class="row"></section>
+    {{{block "scripts"}}}
+  </body>
+</html>
