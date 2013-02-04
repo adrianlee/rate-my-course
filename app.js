@@ -2,6 +2,23 @@ var express = require('express'),
     hbs = require('hbs'),
     app = express();
 
+var hbsHandler = require('./hbs');
+
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  // intercept OPTIONS method
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    console.log('OMG');
+    next();
+  }
+};
+
 ////////////////////////////////////////////////
 // Express Configuration
 ////////////////////////////////////////////////
@@ -12,6 +29,7 @@ app.configure(function() {
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(allowCrossDomain);
   app.use(app.router);
   app.use(express.static(__dirname + '/public'), { maxAge: 300000 });
 });
@@ -21,30 +39,9 @@ app.configure('development', function(){
 });
 
 ////////////////////////////////////////////////
-// Handlebars
-////////////////////////////////////////////////
-var blocks = {};
-
-hbs.registerHelper('extend', function(name, context) {
-    var block = blocks[name];
-    if (!block) {
-        block = blocks[name] = [];
-    }
-
-    block.push(context(this));
-});
-
-hbs.registerHelper('block', function(name) {
-    var val = (blocks[name] || []).join('\n');
-
-    // clear the block
-    blocks[name] = [];
-    return val;
-});
-
-////////////////////////////////////////////////
 // Router
 ////////////////////////////////////////////////
+
 app.get('/', function(req, res) {
   res.render('index');
 });

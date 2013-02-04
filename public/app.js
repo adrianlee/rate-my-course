@@ -1,6 +1,5 @@
 (function($){
   AppRouter = Backbone.Router.extend({
-
     routes:{
       "": "home",
       "!/register": "register",

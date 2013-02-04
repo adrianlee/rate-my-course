@@ -20,13 +20,15 @@
 
     <script type="text/javascript" src="/app.js"></script>
     <script type="text/javascript" src="/views.js"></script>
-    <!-- <script type="text/javascript" src="/controller.js"></script> -->
+    <script type="text/javascript" src="/models.js"></script>
+    <script type="text/javascript" src="/controllers.js"></script>
 
     <script type="text/javascript">
       StackMob.init({
         appName: "ten",
         clientSubdomain: "junirokgmailcom",
         publicKey: "75c4ebdf-1e15-4a04-9511-cfcfe61dc4f9",
+        apiURL: "https://api.stackmob.com/",
         apiVersion: 0
       });
     </script>
@@ -75,9 +77,9 @@
             <h2 class="subheader">Please sign in</h2>
             <input type="text" class="input-block-level" placeholder="Username">
             <input type="password" class="input-block-level" placeholder="Password">
-            <button class="button" type="submit">Sign in</button>
+            <button class="button submit">Sign in</button>
             <p>
-              <a href="/#/forgot">Forgot Password</a>
+              <a href="/#!/forgot">Forgot Password</a>
               <br/>
               <a href="/#!/register">Register</a>
             </p>
@@ -112,7 +114,7 @@
               </div>
             </fieldset>
             <span>By clicking to register you agree to the <a href="#!/terms">terms of agreement</a></span><br><br>
-            <button class="button" type="submit">Register</button>
+            <button class="button submit">Register</button>
             <a href="/" class="button" type="submit">Cancel</a>
           </form>
         </div>
@@ -121,7 +123,6 @@
   </head>
 
   <body>
-    {{{body}}}
     <nav class="top-bar">
       <ul>
         <li class="name"><h1><a href="/">RateMyCourses</a></h1></li>
@@ -139,7 +140,8 @@
       </section>
     </nav>
 
-    <section id="main" class="row"></section>
+    {{{body}}}
+
     {{{block "scripts"}}}
   </body>
 </html>

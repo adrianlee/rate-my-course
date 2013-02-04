@@ -42,6 +42,24 @@ var LoginView = Backbone.View.extend({
     // $('.span4').append(listView.render().el);
 
     return this;
+  },
+
+  events: {
+    "click .submit": "submit"
+  },
+
+  submit: function () {
+    console.log("LOGIN!");
+    var user = new StackMob.User({ username: 'adrian', password: '123' });
+
+    user.login(false, {
+      success: function(model) {
+        console.log("success");
+      },
+      error: function(model, response) {
+        console.log("error");
+      }
+    });
   }
 
 });
@@ -66,6 +84,16 @@ var RegisterView = Backbone.View.extend({
     // $('.span4').append(listView.render().el);
 
     return this;
-  }
+  },
 
+  events: {
+    "click .submit": "submit"
+  },
+
+  submit: function () {
+    console.log("REGISTER!");
+    var user = new StackMob.User({ username: 'adrian', password: '123', email: 'jun.irok@gmail.com' });
+
+    user.create();
+  }
 });
