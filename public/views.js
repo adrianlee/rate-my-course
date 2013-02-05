@@ -49,15 +49,16 @@ var LoginView = Backbone.View.extend({
   },
 
   submit: function () {
+    var self = this;
     console.log("LOGIN!");
-    var user = new StackMob.User({ username: 'adrian', password: '123' });
-
-    user.login(false, {
-      success: function(model) {
-        console.log("success");
+    Parse.User.logIn("adrian", "123", {
+      success: function(user) {
+        // Do stuff after successful login.
+        self.render();
+        App.navigate('/', true);
       },
-      error: function(model, response) {
-        console.log("error");
+      error: function(user, error) {
+        // The login failed. Check error to see why.
       }
     });
   }
@@ -92,8 +93,21 @@ var RegisterView = Backbone.View.extend({
 
   submit: function () {
     console.log("REGISTER!");
-    var user = new StackMob.User({ username: 'adrian', password: '123', email: 'jun.irok@gmail.com' });
+    var user = new Parse.User();
 
-    user.create();
+    user.set("username", "adrian");
+    user.set("password", "123");
+    user.set("email", "jun.irok@gmail.com");
+
+    user.signUp(null, {
+      success: function(user) {
+        console.log("hurray");
+        // Hooray! Let them use the app now.
+      },
+      error: function(user, error) {
+        // Show the error message somewhere and let the user try again.
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
   }
 });
