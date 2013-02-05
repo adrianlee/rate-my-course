@@ -1,22 +1,28 @@
-(function($){
-  AppRouter = Backbone.Router.extend({
-    routes:{
-      "": "home",
-      "!/register": "register",
-      "register": "register",
-      "!/login": "login"
-    },
+var ratemycourse = {};
+var App = angular.module('ratemycourse', ['ngResource']);
 
-    home: function() {
-      new HomeView();
-    },
-
-    register: function() {
-      new RegisterView();
-    },
-
-    login: function() {
-      new LoginView();
-    }
+App.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/', {
+    templateUrl : '/templates/home.html',
+    controller : HomeCtrl
   });
-}(jQuery));
+
+  $routeProvider.when('/register', {
+    templateUrl : '/templates/register.html',
+    controller : RegisterCtrl
+  });
+
+  $routeProvider.when('/login', {
+    templateUrl : '/templates/login.html',
+    controller : LoginCtrl
+  });
+
+  $routeProvider.when('/logout', {
+    templateUrl : '/templates/logout.html',
+    controller : LogoutCtrl
+  });
+
+  $routeProvider.otherwise({
+    redirectTo : '/'
+  });
+}]);
