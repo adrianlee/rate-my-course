@@ -22,12 +22,16 @@
       <section>
         <ul class="left">
           <li><a href="#">Find a Course</a></li>
+          <li><a href="#test">Test</a></li>
         </ul>
-
+        {{email}}
         <ul class="right">
           <li data-ng-hide="isLoggedIn"><a href="#login">Login</a></li>
           <li data-ng-hide="isLoggedIn"><a href="#register">Register</a></li>
+          <li data-ng-show="isLoggedIn"><a href="#logout">
+            {{email}}</a></li>
           <li data-ng-show="isLoggedIn"><a href="#logout">Logout</a></li>
+
         </ul>
       </section>
     </nav>

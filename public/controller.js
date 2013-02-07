@@ -14,9 +14,13 @@ function MainCtrl($scope, $rootScope) {
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
 function HeaderCtrl($scope) {
-
+  console.log(Parse.User.current().attributes.email);
+  var user = Parse.User.current();
+  console.log(user.attributes);
+  $scope.email = user;
 }
 HeaderCtrl.$inject = ['$scope'];
+
 
 function HomeCtrl($scope) {
   $scope.title = "omg"
@@ -125,6 +129,34 @@ function LogoutCtrl($scope, $rootScope, $location) {
 }
 LogoutCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
+function TestCtrl($scope, $rootScope, $location) {
+
+  var user1= Parse.User.current();
+  // var uniqueID = user1.get
+  // console.log(user1);
+
+  $scope.submit =function(comment){
+
+    var Comment = Parse.Object.extend("Comment");
+    var comment2 = new Comment();
+    comment2.set("comment", comment.comment);
+    comment2.set("user", user1);
+
+    comment2.save(null, {
+      success: function(comment) {
+        // The object was saved successfully.
+        alert(JSON.stringify(comment));
+      },
+      error: function(comment, error) {
+        // The save failed.
+        // error is a Parse.Error with an error code and description.
+        alert(JSON.stringify(comment));
+        alert(JSON.stringify(error));
+      }
+    });
+ }
+}
+TestCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
 
 
