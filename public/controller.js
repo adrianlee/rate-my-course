@@ -32,9 +32,46 @@ function RegisterCtrl($scope) {
     if (newUser.password != newUser.password2) {
       return alert("Password do not match");
     }
+
+    if (newUser.username)
+
     var user = new Parse.User();
+    if ((newUser.username.length) > 32){
+
+      return alert("Username length has to be lower than 32 characters");
+
+    }
+
     user.set("username", newUser.username);
+
+    if (((newUser.password.length) > 32)|| (newUser.password.length) < 8) {
+
+      return alert("Password length should be between 8 and 32 characters");
+
+    }
+
+
     user.set("password", newUser.password);
+
+    if (!newUser.email){
+
+      return alert("Email field left blank");
+    }
+
+    if ((newUser.email.length) > 60){
+
+      return alert("Email length has to be lower than 60 characters");
+    }
+
+    var patt = /mcgill.ca$/g;
+    var patt2 = /concordia.ca$/g;
+    var patt3 = /umontreal.ca$/g;
+
+    if (  (!patt.test(newUser.email)) || (!patt2.test(newUser.email)) || (!patt3.test(newUser.email)) ){
+
+      return alert("Please enter a valid university email");
+    } 
+
     user.set("email", newUser.email);
     // user.set("first", newUser.first);
     // user.set("last", newUser.last);
