@@ -27,9 +27,7 @@ $routeProvider.when('/test', {
     controller : TestCtrl
   });
 
-
-
-  $routeProvider.otherwise({
+ $routeProvider.otherwise({
     redirectTo : '/'
   });
 }]);

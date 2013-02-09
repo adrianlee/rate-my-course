@@ -13,13 +13,14 @@ function MainCtrl($scope, $rootScope) {
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
-function HeaderCtrl($scope) {
+function HeaderCtrl($scope,$rootScope) {
   console.log(Parse.User.current().attributes.email);
   var user = Parse.User.current();
   console.log(user.attributes);
-  $scope.email = user;
+  //$scope.isLoggedIn = true;
+  $rootScope.email = user.attributes.email;
 }
-HeaderCtrl.$inject = ['$scope'];
+HeaderCtrl.$inject = ['$scope', '$rootScope'];
 
 
 function HomeCtrl($scope) {
