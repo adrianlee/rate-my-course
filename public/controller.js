@@ -1,15 +1,15 @@
 function MainCtrl($scope, $rootScope) {
   $rootScope.$on('logout', function() {
     console.log('HeaderCtrl: Logged Out');
-    $scope.isLoggedIn = false;
+    $rootScope.isLoggedIn = false;
   });
 
   $rootScope.$on('login', function() {
     console.log('HeaderCtrl: Logged In');
-    $scope.isLoggedIn = true;
+    $rootScope.isLoggedIn = true;
   });
 
-  $scope.isLoggedIn = !!Parse.User.current();
+  $rootScope.isLoggedIn = !!Parse.User.current();
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
@@ -19,7 +19,18 @@ function HeaderCtrl($scope) {
 HeaderCtrl.$inject = ['$scope'];
 
 function HomeCtrl($scope) {
-  $scope.title = "omg"
+  var user = Parse.User.current();
+
+  $scope.title = "omg";
+
+  console.log(user);
+
+  if (user) {
+    $scope.emailVerified = user.attributes.emailVerified;
+    $scope.username = user.attributes.username;
+  } else {
+    $scope.emailVerified = true;
+  }
 }
 HomeCtrl.$inject = ['$scope'];
 
