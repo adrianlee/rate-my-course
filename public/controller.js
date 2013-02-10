@@ -14,10 +14,13 @@ function MainCtrl($scope, $rootScope) {
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
 function HeaderCtrl($scope) {
+ if ($scope.isLoggedIn) {
   console.log(Parse.User.current().attributes.email);
   var user = Parse.User.current();
   console.log(user.attributes);
   $scope.email = user;
+
+}
 }
 HeaderCtrl.$inject = ['$scope'];
 
@@ -67,13 +70,13 @@ function RegisterCtrl($scope) {
       return alert("Email length has to be lower than 60 characters");
     }
 
-    var patt = /mcgill.ca$/g;
-    var patt2 = /concordia.ca$/g;
-    var patt3 = /umontreal.ca$/g;
+    var patt = /mcgill.ca$/;
+    var patt2 = /concordia.ca$/;
+    var patt3 = /umontreal.ca$/;
 
-    if (  (!patt.test(newUser.email)) || (!patt2.test(newUser.email)) || (!patt3.test(newUser.email)) ){
+    if ( (!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email)) ){
 
-      return alert("Please enter a valid university email");
+      return alert(newUser.email);
     } 
 
     user.set("email", newUser.email);
