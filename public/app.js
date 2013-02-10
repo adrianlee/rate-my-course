@@ -22,12 +22,21 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : LogoutCtrl
   });
 
-$routeProvider.when('/test', {
-    templateUrl : '/templates/test.html',
-    controller : TestCtrl
+$routeProvider.when('/mcgill', {
+    templateUrl : '/templates/mcgill.html',
+    //controller : McGillCtrl
   });
 
- $routeProvider.otherwise({
+$routeProvider.when('/concordia', {
+    templateUrl : '/templates/concordia.html',
+    //controller : ConcordiaCtrl
+  });
+
+$routeProvider.when('/udem', {
+    templateUrl : '/templates/udem.html',
+    //controller : UdemCtrl
+  });
+  $routeProvider.otherwise({
     redirectTo : '/'
   });
 }]);

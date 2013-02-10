@@ -1,41 +1,29 @@
 function MainCtrl($scope, $rootScope) {
   $rootScope.$on('logout', function() {
     console.log('HeaderCtrl: Logged Out');
-    $rootScope.isLoggedIn = false;
+    $scope.isLoggedIn = false;
   });
 
   $rootScope.$on('login', function() {
     console.log('HeaderCtrl: Logged In');
-    $rootScope.isLoggedIn = true;
+    $scope.isLoggedIn = true;
   });
 
-  $rootScope.isLoggedIn = !!Parse.User.current();
+  $scope.isLoggedIn = !!Parse.User.current();
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
-function HeaderCtrl($scope,$rootScope) {
+function HeaderCtrl($scope) {
   console.log(Parse.User.current().attributes.email);
   var user = Parse.User.current();
   console.log(user.attributes);
-  //$scope.isLoggedIn = true;
-  $rootScope.email = user.attributes.email;
+  $scope.email = user;
 }
-HeaderCtrl.$inject = ['$scope', '$rootScope'];
+HeaderCtrl.$inject = ['$scope'];
 
 
 function HomeCtrl($scope) {
-  var user = Parse.User.current();
-
-  $scope.title = "omg";
-
-  console.log(user);
-
-  if (user) {
-    $scope.emailVerified = user.attributes.emailVerified;
-    $scope.username = user.attributes.username;
-  } else {
-    $scope.emailVerified = true;
-  }
+  $scope.title = "omg"
 }
 HomeCtrl.$inject = ['$scope'];
 
