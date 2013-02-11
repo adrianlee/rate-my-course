@@ -76,7 +76,7 @@ function RegisterCtrl($scope) {
 
     if ( (!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email)) ){
 
-      return alert(newUser.email);
+      return alert("Please enter a valid university email");
     } 
 
     user.set("email", newUser.email);
@@ -87,7 +87,12 @@ function RegisterCtrl($scope) {
       success: function(user) {
         // Hooray! Let them use the app now.
         alert("yay!")
+
+        /**$location.path('/');
+        $location.path('/').replace();
+        $location.path('/'); **/
         console.log(user);
+        //scope.$apply(function() { $location.path("/mcgill"); });
       },
       error: function(user, error) {
         // Show the error message somewhere and let the user try again.
