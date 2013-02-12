@@ -1,3 +1,8 @@
+
+/*
+ *  MAIN
+ */
+
 function MainCtrl($scope, $rootScope) {
   $rootScope.$on('logout', function() {
     console.log('HeaderCtrl: Logged Out');
@@ -13,24 +18,36 @@ function MainCtrl($scope, $rootScope) {
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
-function HeaderCtrl($scope) {
- if ($scope.isLoggedIn) {
-  console.log(Parse.User.current().attributes.email);
-  var user = Parse.User.current();
-  console.log(user.attributes);
-  $scope.email = user;
+/*
+ *  HEADER
+ */
 
-}
+function HeaderCtrl($scope) {
+  if ($scope.isLoggedIn) {
+    console.log(Parse.User.current().attributes.email);
+    var user = Parse.User.current();
+    console.log(user.attributes);
+    $scope.email = user;
+  }
 }
 HeaderCtrl.$inject = ['$scope'];
 
+
+/*
+ *  HOME
+ */
 
 function HomeCtrl($scope) {
   $scope.title = "omg"
 }
 HomeCtrl.$inject = ['$scope'];
 
-function RegisterCtrl($scope) {
+
+/*
+ *  REGISTER
+ */
+
+function RegisterCtrl($scope, $rootScope, $location) {
   $scope.submit = function(newUser) {
     if (!newUser) {
       return alert("Nothing entered");
@@ -77,7 +94,7 @@ function RegisterCtrl($scope) {
     if ( (!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email)) ){
 
       return alert("Please enter a valid university email");
-    } 
+    }
 
     user.set("email", newUser.email);
     // user.set("first", newUser.first);
@@ -86,13 +103,9 @@ function RegisterCtrl($scope) {
     user.signUp(null, {
       success: function(user) {
         // Hooray! Let them use the app now.
-        alert("yay!")
-
-        /**$location.path('/');
-        $location.path('/').replace();
-        $location.path('/'); **/
-        console.log(user);
-        //scope.$apply(function() { $location.path("/mcgill"); });
+        alert('Registration Successful');
+        $rootScope.$emit('login');
+        window.location.hash = "/";
       },
       error: function(user, error) {
         // Show the error message somewhere and let the user try again.
@@ -103,7 +116,12 @@ function RegisterCtrl($scope) {
     });
   }
 }
-RegisterCtrl.$inject = ['$scope'];
+RegisterCtrl.$inject = ['$scope', '$rootScope', '$location'];
+
+
+/*
+ *  LOGIN
+ */
 
 function LoginCtrl($scope, $rootScope, $location) {
   $scope.submit = function(user) {
@@ -126,6 +144,39 @@ function LoginCtrl($scope, $rootScope, $location) {
 }
 LoginCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
+
+
+/*
+ *  Forgot
+ */
+
+function ForgotCtrl($scope, $rootScope, $location) {
+  $scope.forgotPass = function (user) {
+    console.log(user);
+    // reset password reset
+    Parse.User.requestPasswordReset(user.email, {
+      success: function() {
+        // Password reset request was sent successfully
+        alert("Reset Password Email Sent");
+        // redirect
+        $location.path('/login').replace();
+      },
+      error: function(error) {
+        // Show the error message somewhere
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  }
+}
+ForgotCtrl.$inject = ['$scope', '$rootScope', '$location'];
+
+
+
+
+/*
+ *  Logout
+ */
+
 function LogoutCtrl($scope, $rootScope, $location) {
   $rootScope.$emit('logout');
 
@@ -136,6 +187,12 @@ function LogoutCtrl($scope, $rootScope, $location) {
   };
 }
 LogoutCtrl.$inject = ['$scope', '$rootScope', '$location'];
+
+
+
+/*
+ *  Test
+ */
 
 function TestCtrl($scope, $rootScope, $location) {
 

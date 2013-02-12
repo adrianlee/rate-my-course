@@ -22,16 +22,21 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : LogoutCtrl
   });
 
-$routeProvider.when('/mcgill', {
-    templateUrl : '/templates/mcgill.html',
+  $routeProvider.when('/mcgill', {
+    templateUrl : '/templates/mcgill.html'
   });
 
-$routeProvider.when('/concordia', {
-    templateUrl : '/templates/concordia.html',
+  $routeProvider.when('/forgot', {
+    templateUrl : '/templates/forgot.html',
+    controller : ForgotCtrl
   });
 
-$routeProvider.when('/udem', {
-    templateUrl : '/templates/udem.html',
+  $routeProvider.when('/concordia', {
+    templateUrl : '/templates/concordia.html'
+  });
+
+  $routeProvider.when('/udem', {
+    templateUrl : '/templates/udem.html'
   });
   $routeProvider.otherwise({
     redirectTo : '/'
