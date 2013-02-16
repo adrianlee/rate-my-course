@@ -1,4 +1,3 @@
-
 /*
  *  MAIN
  */
@@ -15,22 +14,24 @@ function MainCtrl($scope, $rootScope) {
   });
 
   $scope.isLoggedIn = !!Parse.User.current();
+
+  //$scope.user = Parse.User.current();
+  $rootScope.user = Parse.User.current();
+
+  console.log($rootScope.user);
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
 /*
  *  HEADER
  */
-
-function HeaderCtrl($scope) {
+function HeaderCtrl($scope, $rootScope) {
   if ($scope.isLoggedIn) {
-    console.log(Parse.User.current().attributes.email);
-    var user = Parse.User.current();
-    console.log(user.attributes);
-    $scope.email = user;
+    var email = Parse.User.current().attributes.email;
+    $scope.email = email;
   }
 }
-HeaderCtrl.$inject = ['$scope'];
+HeaderCtrl.$inject = ['$scope', '$rootScope'];
 
 
 /*
@@ -38,7 +39,7 @@ HeaderCtrl.$inject = ['$scope'];
  */
 
 function HomeCtrl($scope) {
-  $scope.title = "omg"
+
 }
 HomeCtrl.$inject = ['$scope'];
 
@@ -46,7 +47,6 @@ HomeCtrl.$inject = ['$scope'];
 /*
  *  REGISTER
  */
-
 function RegisterCtrl($scope, $rootScope, $location) {
   $scope.submit = function(newUser) {
     if (!newUser) {
@@ -105,7 +105,8 @@ function RegisterCtrl($scope, $rootScope, $location) {
         // Hooray! Let them use the app now.
         alert('Registration Successful');
         $rootScope.$emit('login');
-        window.location.hash = "/";
+        $location.path('/');
+        $rootScope.$digest();
       },
       error: function(user, error) {
         // Show the error message somewhere and let the user try again.
@@ -122,7 +123,6 @@ RegisterCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  LOGIN
  */
-
 function LoginCtrl($scope, $rootScope, $location) {
   $scope.submit = function(user) {
     if (!user) {
@@ -132,9 +132,8 @@ function LoginCtrl($scope, $rootScope, $location) {
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $rootScope.$emit('login');
-        $location.path('/');
         $location.path('/').replace();
-        $location.path('/');
+        $rootScope.$digest();
       },
       error: function(user, error) {
         alert(JSON.stringify(error));
@@ -149,7 +148,6 @@ LoginCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Forgot
  */
-
 function ForgotCtrl($scope, $rootScope, $location) {
   $scope.forgotPass = function (user) {
     console.log(user);
@@ -176,7 +174,6 @@ ForgotCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Logout
  */
-
 function LogoutCtrl($scope, $rootScope, $location) {
   $rootScope.$emit('logout');
 
@@ -184,6 +181,7 @@ function LogoutCtrl($scope, $rootScope, $location) {
 
   if (!Parse.User.current()) {
     $location.path('/').replace();
+    $rootScope.$digest();
   };
 }
 LogoutCtrl.$inject = ['$scope', '$rootScope', '$location'];
@@ -193,10 +191,9 @@ LogoutCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Test
  */
-
 function TestCtrl($scope, $rootScope, $location) {
 
-  var user1= Parse.User.current();
+  var user1 = Parse.User.current();
   // var uniqueID = user1.get
   // console.log(user1);
 
@@ -225,4 +222,65 @@ TestCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
 
 
+/*
+ *  Create Course
+ */
+function CreateCourseCtrl($scope) {
+  var current_user = Parse.User.current();
 
+  console.log("test");
+
+  $scope.submit = function(form) {
+    var Courses = Parse.Object.extend("Courses");
+    var course = new Courses();
+    course.set("university", form.university);
+    course.set("title", form.courseTitle);
+    course.set("code", form.courseCode);
+    course.set("number", form.courseNumber);
+    course.set("createdBy", current_user);
+
+    course.save(null, {
+      success: function(comment) {
+        // The object was saved successfully.
+        alert(JSON.stringify(comment));
+      },
+      error: function(comment, error) {
+        // The save failed.
+        // error is a Parse.Error with an error code and description.
+        alert(JSON.stringify(comment));
+        alert(JSON.stringify(error));
+      }
+    });
+ }
+}
+CreateCourseCtrl.$inject = ['$scope'];
+
+/*
+ *  University
+ */
+function UniversityCtrl($scope, $location) {
+  console.log($location.path());
+
+  var Courses = Parse.Object.extend("Courses");
+  var query = new Parse.Query(Courses);
+  query.equalTo("university", $location.path().substring(1));
+  query.find({
+    success: function(results) {
+      console.log("Successfully retrieved " + results.length + " scores.");
+      console.log(results);
+      for (var i=0; i < results.length; i++) {
+        var build_string = "";
+        build_string += "<tr>";
+        build_string += "<td>" + results[i].attributes.code + "</td>";
+        build_string += "<td>" + results[i].attributes.number + "</td>";
+        build_string += "<td>" + results[i].attributes.title + "</td>";
+        build_string += "</tr>";
+        $('#courses').append(build_string);
+      }
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+}
+UniversityCtrl.$inject = ['$scope', '$location'];

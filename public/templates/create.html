@@ -1,0 +1,20 @@
+<h3>Create Course</h3>
+Select University:<br/>
+<select data-ng-model="form.university">
+  <option value="mcgill">McGill</option>
+  <option value="concordia">Concordia</option>
+  <option value="udem">University of Montreal</option>
+</select><br/>
+Course Title:<br/>
+<input type="text" placeholder="Software Engineering Practice" data-ng-model="form.courseTitle"><br/>
+Course Code:<br/>
+<input type="text" placeholder="ECSE" data-ng-model="form.courseCode"><br/>
+Course Number:<br/>
+<input type="text" placeholder="428" data-ng-model="form.courseNumber"><br/>
+<a class="btn btn-primary" data-ng-click="submit(form)">Create Course</a>
+
+
+<h5>Debug</d5>
+<pre>
+{{form}}
+</pre>

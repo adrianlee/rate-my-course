@@ -1,28 +1,51 @@
-   <div class="row">
-    <div class="seven columns centered">
-      <div class="row collapse">
-        <div class="ten mobile-three columns">
-          <input type="text" placeholder="Search by Course Code or Course Name" />
-        </div>
-        <div class="two mobile-one columns">
-          <a class="button expand postfix">Search</a>
-        </div>
-      </div>
-      <a href="#search">Advanced Search</a>
+<!-- Create a new course -->
+<div class="row">
+  <div class="span12">
+    <a href="#/mcgill/create" class="btn">Create Course</a>
+  </div>
+</div>
+
+
+<!-- Search Bar -->
+<div class="row">
+  <div class="span10">
+    <h4>Search for a Course</h4>
+    <div class="input-append">
+      <input class="span6" id="appendedInputButtons" type="text" placeholder="Search by Course Code or Course Name">
+      <button class="btn btn-primary" type="button">Search</button>
+      <button class="btn btn-primary" type="button">Advanced Search</button>
     </div>
   </div>
-
-  <br/>
-  <br/>
+</div>
 
 
- <div class="row">
-    <div class="six columns panel centered">
-      <h4 class="subheader">Top Rated Courses</h4>
-      <ul class="disc">
-        <li><a href="#">ARA 1991 - Applied Linguistic Anthropology</a></li>
-        <li><a href="#">ECE 2012 - Electric Circuits 2</a></li>
-        <li><a href="#">ECN 2205 - Non-Cooperative Game Theory</a></li>
-      </ul>
-    </div>
+<br/>
+
+
+<!-- List of Courses for review -->
+<table class="table table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th>Course Code</th>
+      <th>Course Number</th>
+      <th>Course Title</th>
+    </tr>
+  </thead>
+  <tbody id="courses">
+
+  </tbody>
+</table>
+
+<br/>
+
+<!-- Top Rated Courses -->
+<div class="row">
+  <div class="span6">
+    <h4 class="subheader">Top Rated Courses</h4>
+    <ul class="disc">
+      <li><a href="#">ARA 1991 - Applied Linguistic Anthropology</a></li>
+      <li><a href="#">ECE 2012 - Electric Circuits 2</a></li>
+      <li><a href="#">ECN 2205 - Non-Cooperative Game Theory</a></li>
+    </ul>
   </div>
+</div>

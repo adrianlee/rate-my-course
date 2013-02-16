@@ -1,18 +1,13 @@
-<div class="container">
-  <div class="four columns centered">
-    <form class="form-signin">
-      <h2 class="subheader">Please sign in</h2>
+<div class="row">
+  <div class="span4">
+    <form>
+      <h3>Please sign in</h3>
       <input type="text" class="input-block-level" placeholder="Username" data-ng-model="user.username">
       <input type="password" class="input-block-level" placeholder="Password" data-ng-model="user.password">
-      <button class="button" data-ng-click="submit(user)">Sign in</button>
-      <p>
-        <a href="#forgot">Forgot Password</a>
-        <br/>
-        <a href="#register">Register</a>
-      </p>
-      <!-- <pre>
-      {{user}}
-      </pre> -->
+      <button class="btn btn-primary" data-ng-click="submit(user)">Sign in</button>
+      <br/><br/>
+      <a href="#/forgot">Forgot Password</a><br/>
+      <a href="#/register">Register</a>
     </form>
   </div>
 </div>

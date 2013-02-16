@@ -1,6 +1,13 @@
 var ratemycourse = {};
 var App = angular.module('ratemycourse', ['ngResource']);
 
+// Allow usage of back button
+App.config(['$locationProvider', function($locationProvider) {
+  // $locationProvider.html5Mode(true);
+  // $locationProvider.hashPrefix('#');
+}]);
+
+// Router
 App.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl : '/templates/home.html',
@@ -23,7 +30,13 @@ App.config(['$routeProvider', function($routeProvider) {
   });
 
   $routeProvider.when('/mcgill', {
-    templateUrl : '/templates/mcgill.html'
+    templateUrl : '/templates/mcgill.html',
+    controller: UniversityCtrl
+  });
+
+  $routeProvider.when('/mcgill/create', {
+    templateUrl : '/templates/create.html',
+    controller: CreateCourseCtrl
   });
 
   $routeProvider.when('/forgot', {
@@ -32,12 +45,15 @@ App.config(['$routeProvider', function($routeProvider) {
   });
 
   $routeProvider.when('/concordia', {
-    templateUrl : '/templates/concordia.html'
+    templateUrl : '/templates/concordia.html',
+    controller: UniversityCtrl
   });
 
   $routeProvider.when('/udem', {
-    templateUrl : '/templates/udem.html'
+    templateUrl : '/templates/udem.html',
+    controller: UniversityCtrl
   });
+
   $routeProvider.otherwise({
     redirectTo : '/'
   });
