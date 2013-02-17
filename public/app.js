@@ -34,7 +34,7 @@ App.config(['$routeProvider', function($routeProvider) {
     controller: UniversityCtrl
   });
 
-  $routeProvider.when('/mcgill/create', {
+  $routeProvider.when('/create', {
     templateUrl : '/templates/create.html',
     controller: CreateCourseCtrl
   });

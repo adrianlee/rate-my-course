@@ -231,6 +231,24 @@ function CreateCourseCtrl($scope) {
   console.log("test");
 
   $scope.submit = function(form) {
+    // Validation Login
+
+    // Check if form is filled
+    if (!form) {
+      return alert('form is empty');
+    }
+
+    // Uppercase course code
+    if (form.courseCode && typeof form.courseCode == "string") {
+      form.courseCode = form.courseCode.toUpperCase();
+    }
+
+    // todo: Check if form.courseCode is a number
+
+    // todo: Transform form.courseTitle to have capitalization on each word
+
+
+    // Create Courses Object, Set Fields, Save.
     var Courses = Parse.Object.extend("Courses");
     var course = new Courses();
     course.set("university", form.university);
@@ -238,6 +256,11 @@ function CreateCourseCtrl($scope) {
     course.set("code", form.courseCode);
     course.set("number", form.courseNumber);
     course.set("createdBy", current_user);
+
+    var keywords = [];
+    keywords.push(form.courseCode + form.courseNumber);
+    keywords.push(form.courseCode + " " + form.courseNumber);
+    course.set("keywords", keywords);
 
     course.save(null, {
       success: function(comment) {
@@ -267,16 +290,16 @@ function UniversityCtrl($scope, $location) {
   query.find({
     success: function(results) {
       console.log("Successfully retrieved " + results.length + " scores.");
-      console.log(results);
-      for (var i=0; i < results.length; i++) {
-        var build_string = "";
-        build_string += "<tr>";
-        build_string += "<td>" + results[i].attributes.code + "</td>";
-        build_string += "<td>" + results[i].attributes.number + "</td>";
-        build_string += "<td>" + results[i].attributes.title + "</td>";
-        build_string += "</tr>";
-        $('#courses').append(build_string);
+
+      var jsonArray = [];
+
+      for (var i = 0; i < results.length; i++) {
+        jsonArray.push(results[i].toJSON());
       }
+
+      $scope.courses = jsonArray;
+
+      $scope.$digest();
     },
     error: function(error) {
       alert("Error: " + error.code + " " + error.message);

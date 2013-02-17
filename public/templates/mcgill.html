@@ -1,7 +1,7 @@
 <!-- Create a new course -->
 <div class="row">
   <div class="span12">
-    <a href="#/mcgill/create" class="btn">Create Course</a>
+    <a href="#/create" class="btn">Create Course</a>
   </div>
 </div>
 
@@ -10,7 +10,7 @@
   <div class="span12">
     <h4>Search for a Course</h4>
     <div class="input-append">
-      <input class="span6" id="appendedInputButtons" type="text" placeholder="Search by Course Code or Course Name">
+      <input ng-model="search" class="span6" id="appendedInputButtons" type="text" placeholder="Search by Course Code or Course Name">
       <button class="btn btn-primary" type="button">Search</button>
       <!-- <button class="btn btn-primary" type="button">Advanced Search</button> -->
     </div>
@@ -28,6 +28,13 @@
       <th>Course Title</th>
     </tr>
   </thead>
+  <tbody>
+    <tr ng-repeat="course in courses | filter:search">
+        <td>{{course.code}}</td>
+        <td>{{course.number}}</td>
+        <td>{{course.title}}</td>
+    </tr>
+  </tbody>
   <tbody id="courses">
 
   </tbody>
