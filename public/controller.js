@@ -6,19 +6,21 @@ function MainCtrl($scope, $rootScope) {
   $rootScope.$on('logout', function() {
     console.log('HeaderCtrl: Logged Out');
     $scope.isLoggedIn = false;
+    $rootScope.user = Parse.User.current();
+    $scope.$digest();
   });
 
-  $rootScope.$on('login', function() {
+  $rootScope.$on('login', function() {  
     console.log('HeaderCtrl: Logged In');
     $scope.isLoggedIn = true;
+    $rootScope.user = Parse.User.current();
+    $scope.$digest();
   });
 
   $scope.isLoggedIn = !!Parse.User.current();
 
   //$scope.user = Parse.User.current();
   $rootScope.user = Parse.User.current();
-
-  console.log($rootScope.user);
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
@@ -37,7 +39,6 @@ HeaderCtrl.$inject = ['$scope', '$rootScope'];
 /*
  *  HOME
  */
-
 function HomeCtrl($scope) {
 
 }
@@ -73,7 +74,6 @@ function RegisterCtrl($scope, $rootScope, $location) {
       return alert("Password length should be between 8 and 32 characters");
 
     }
-
 
     user.set("password", newUser.password);
 
