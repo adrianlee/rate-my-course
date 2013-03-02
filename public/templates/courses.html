@@ -5,6 +5,7 @@
 <!-- Create a new rating -->
 <div class="row">
   <div class="span8">
+    <p class="lead" ng-hide="ratings">There are no ratings for this course.</p>
     <div class="media-box" ng-repeat="rating in ratings | orderBy:'createdAt':true">
       <div class="media">
         <a class="pull-left" href="#"><img class="media-object" ng-src="{{rating.image}}"></a>
