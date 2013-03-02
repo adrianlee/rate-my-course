@@ -347,6 +347,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
       success: function(rating) {
         // The object was saved successfully.
         console.log(rating);
+        window.location.reload();
       },
       error: function(rating, error) {
         // The save failed.
@@ -391,7 +392,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
         var rating = results[i].toJSON();
         rating.createdBy = results[i].attributes.createdBy.toJSON();
         rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim());
-
+        rating.timestamp = new Date(results[i].createdAt);
         jsonArray.push(rating);
       }
 

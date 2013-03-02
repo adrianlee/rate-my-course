@@ -29,7 +29,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="course in courses | filter:search">
+    <tr ng-repeat="course in courses | filter: search" onClick="window.open('#/courses/{{course.objectId}}','_self')" style="cursor: pointer; cursor: hand;">
         <td>{{course.code}}</td>
         <td>{{course.number}}</td>
         <td>{{course.title}}</td>
@@ -39,7 +39,6 @@
 
   </tbody>
 </table>
-
 
 <br/>
 

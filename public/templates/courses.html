@@ -5,11 +5,13 @@
 <!-- Create a new rating -->
 <div class="row">
   <div class="span8">
-    <div class="media-box" ng-repeat="rating in ratings">
+    <div class="media-box" ng-repeat="rating in ratings | orderBy:'createdAt':true">
       <div class="media">
-        <a class="pull-left" href="#"><img class="media-object" src="{{rating.image}}"></a>
+        <a class="pull-left" href="#"><img class="media-object" ng-src="{{rating.image}}"></a>
         <div class="media-body">
-          <h4>Rating by {{rating.createdBy.username}}</h4>
+          <h4>Rating by {{rating.createdBy.username}} on {{rating.timestamp}}</h4>
+          Course Rating: <img src="/stars/{{rating.course_rating}}.png" alt=""/>
+          Professor Rating: <img src="/stars/{{rating.prof_rating}}.png" alt=""/>
           <p>{{rating.comments}}</p>
         </div>
       </div>
