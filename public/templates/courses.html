@@ -9,7 +9,6 @@
       <div class="media">
         <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
         <div class="media-body">
-          <pre>{{rating.createdBy}}</pre>
           <h4>Rating by {{rating.createdBy.username}}</h4>
           <p>{{rating.comments}}</p>
         </div>
@@ -53,7 +52,7 @@
       <hr>
       <pre>{{form}}</pre>
     </div>
-    <div ng-hide="isLoggedIn()">
+    <div ng-hide="isLoggedIn">
       <p class="lead">Please log in to rate this course</p>
     </div>
   </div>

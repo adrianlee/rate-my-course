@@ -379,6 +379,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
   var Ratings = Parse.Object.extend("Ratings");
   var query2 = new Parse.Query(Ratings);
   query2.equalTo("course", $routeParams.courseid);
+  query2.include("createdBy");
   query2.find({
     success: function(results) {
       console.log("Successfully retrieved " + results.length + " ratings.");
@@ -387,7 +388,10 @@ function CoursesCtrl($scope, $location, $routeParams) {
       var jsonArray = [];
 
       for (var i = 0; i < results.length; i++) {
-        jsonArray.push(results[i].toJSON());
+        var rating = results[i].toJSON();
+        rating.createdBy = results[i].attributes.createdBy.toJSON();
+
+        jsonArray.push(rating);
       }
 
       $scope.ratings = jsonArray;
