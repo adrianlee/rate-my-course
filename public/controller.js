@@ -242,6 +242,20 @@ function CreateCourseCtrl($scope) {
       return alert('form is empty');
     }
 
+    else if (!form.courseTitle) {
+      return alert ("Please enter a course title");
+      //return $scope.hello = "Please enter a course title\n";
+    }
+
+    else if (!form.courseCode) {
+      return alert ("Please enter a course code");
+    }
+
+    else if (!form.courseNumber) {
+        return alert ("Please enter a course number");
+
+    }
+
     // Uppercase course code
     if (form.courseCode && typeof form.courseCode == "string") {
       form.courseCode = form.courseCode.toUpperCase();
