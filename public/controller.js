@@ -390,6 +390,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
       for (var i = 0; i < results.length; i++) {
         var rating = results[i].toJSON();
         rating.createdBy = results[i].attributes.createdBy.toJSON();
+        rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim());
 
         jsonArray.push(rating);
       }

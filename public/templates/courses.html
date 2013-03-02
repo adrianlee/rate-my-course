@@ -7,7 +7,7 @@
   <div class="span8">
     <div class="media-box" ng-repeat="rating in ratings">
       <div class="media">
-        <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
+        <a class="pull-left" href="#"><img class="media-object" src="{{rating.image}}"></a>
         <div class="media-body">
           <h4>Rating by {{rating.createdBy.username}}</h4>
           <p>{{rating.comments}}</p>
