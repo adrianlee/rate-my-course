@@ -383,7 +383,14 @@ function CoursesCtrl($scope, $location, $routeParams) {
     success: function(results) {
       console.log("Successfully retrieved " + results.length + " ratings.");
       console.log(results);
-      $scope.ratings = results;
+
+      var jsonArray = [];
+
+      for (var i = 0; i < results.length; i++) {
+        jsonArray.push(results[i].toJSON());
+      }
+
+      $scope.ratings = jsonArray;
       $scope.$digest();
     },
     error: function(error) {

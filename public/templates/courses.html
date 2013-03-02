@@ -5,22 +5,13 @@
 <!-- Create a new rating -->
 <div class="row">
   <div class="span8">
-    <div class="media-box">
+    <div class="media-box" ng-repeat="rating in ratings">
       <div class="media">
         <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
         <div class="media-body">
-          <h4>This is the title</h4>
-          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="media-box">
-      <div class="media">
-        <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
-        <div class="media-body">
-          <h4>This is the title</h4>
-          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          <pre>{{rating.createdBy}}</pre>
+          <h4>Rating by {{rating.createdBy.username}}</h4>
+          <p>{{rating.comments}}</p>
         </div>
       </div>
     </div>
