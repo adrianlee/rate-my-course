@@ -29,11 +29,6 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : LogoutCtrl
   });
 
-  $routeProvider.when('/mcgill', {
-    templateUrl : '/templates/mcgill.html',
-    controller: UniversityCtrl
-  });
-
   $routeProvider.when('/create', {
     templateUrl : '/templates/create.html',
     controller: CreateCourseCtrl
@@ -44,13 +39,28 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : ForgotCtrl
   });
 
+  $routeProvider.when('/courses/:courseid', {
+    templateUrl : '/templates/courses.html',
+    controller : CoursesCtrl
+  });
+
+  // $routeProvider.when('/courses/:courseid/create', {
+  //   templateUrl : '/templates/rating.html',
+  //   controller : RatingCtrl
+  // });
+
+  $routeProvider.when('/mcgill', {
+    templateUrl : '/templates/universities/mcgill.html',
+    controller: UniversityCtrl
+  });
+
   $routeProvider.when('/concordia', {
-    templateUrl : '/templates/concordia.html',
+    templateUrl : '/templates/universities/concordia.html',
     controller: UniversityCtrl
   });
 
   $routeProvider.when('/udem', {
-    templateUrl : '/templates/udem.html',
+    templateUrl : '/templates/universities/udem.html',
     controller: UniversityCtrl
   });
 
@@ -58,3 +68,10 @@ App.config(['$routeProvider', function($routeProvider) {
     redirectTo : '/'
   });
 }]);
+
+
+App.filter('capitalize', function() {
+  return function(input, scope) {
+    return input.substring(0,1).toUpperCase()+input.substring(1);
+  }
+});

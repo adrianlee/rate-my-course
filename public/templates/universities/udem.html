@@ -1,23 +1,21 @@
 <!-- Create a new course -->
-<div class="row">
-  <div class="span12">
-    <a href="#/create" class="btn">Create Course</a>
-  </div>
+<div class="alert alert-block">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>Welcome {{user.attributes.username | capitalize}}</h4>
+  We are currently in beta. If you can't find a course, you can make a new submission to our database <a href="#/create">here</a>!
 </div>
-
 
 <!-- Search Bar -->
 <div class="row">
-  <div class="span10">
+  <div class="span12">
     <h4>Search for a Course</h4>
     <div class="input-append">
-      <input class="span6" id="appendedInputButtons" type="text" placeholder="Search by Course Code or Course Name">
+      <input ng-model="search" class="span6" id="appendedInputButtons" type="text" placeholder="Search by Course Code or Course Name">
       <button class="btn btn-primary" type="button">Search</button>
-      <button class="btn btn-primary" type="button">Advanced Search</button>
+      <!-- <button class="btn btn-primary" type="button">Advanced Search</button> -->
     </div>
   </div>
 </div>
-
 
 <br/>
 
@@ -31,6 +29,13 @@
       <th>Course Title</th>
     </tr>
   </thead>
+  <tbody>
+    <tr ng-repeat="course in courses | filter: search">
+        <td>{{course.code}}</td>
+        <td>{{course.number}}</td>
+        <td>{{course.title}}</td>
+    </tr>
+  </tbody>
   <tbody id="courses">
 
   </tbody>

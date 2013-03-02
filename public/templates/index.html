@@ -2,9 +2,9 @@
 <html lang="en" ng-app="ratemycourse">
   <head>
     <title>Rate My Courses</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.0/css/bootstrap.min.css" />
     <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/2.3.0/spacelab/bootstrap.min.css" /> -->
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="/bootstrap.min.css" />
 
     <script src="http://www.parsecdn.com/js/parse-1.2.0.min.js"></script>
     <script type="text/javascript">
@@ -13,7 +13,7 @@
   </head>
 
   <body ng-controller="MainCtrl">
-    <br/>
+
     <div class="container">
       <div class="navbar-wrapper" ng-controller="HeaderCtrl">
           <div class="navbar navbar-inverse">
@@ -41,7 +41,9 @@
             </div>
           </div>
       </div>
+    </div>
 
+    <div class="container">
       <div ng-view></div>
     </div>
 
@@ -51,5 +53,7 @@
     <script type="text/javascript" src="/libs/angular-resource.min.js"></script>
     <script type="text/javascript" src="/app.js"></script>
     <script type="text/javascript" src="/controller.js"></script>
+    <script type="text/javascript" src="/holder.js"></script>
+    <script type="text/javascript" src="/jquery.raty.js"></script>
   </body>
 </html>

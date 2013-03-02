@@ -1,0 +1,125 @@
+.media, .media-body {
+  overflow:hidden;
+  *overflow:visible;
+  zoom:1;
+}
+.media {
+  margin-bottom: 10px;
+}
+.media .media {
+  margin-top: 20px;
+}
+.media .pull-left {
+  margin-right: 10px;
+}
+.media .pull-right {
+  margin-left: 10px;
+}
+.media .media-object {
+  display: block;
+}
+/* Media list */
+.medias {
+  margin-top: 20px;
+  margin-left: 0;
+  list-style-type: none;
+}
+.medias .media {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,.07);
+}
+.medias > .media:last-child {
+  margin: 0;
+  border-bottom: none;
+}
+.medias > .media .media {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+/* Media box */
+.media-box {
+  margin-bottom: 19px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.09);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 480px) {
+    .media .pull-left,
+    .media .pull-right  {
+      float: none;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .media .pull-left {
+        margin-right: 0;
+    }
+    .media .pull-right {
+        margin-left: 0;
+    }
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      margin-top: 10px;
+    }

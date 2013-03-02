@@ -1,0 +1,69 @@
+<div class="page-header">
+  <h1>{{course.university | uppercase}} {{course.code | uppercase}}-{{course.number}} <small>{{course.title}}</small></h1>
+</div>
+
+<!-- Create a new rating -->
+<div class="row">
+  <div class="span8">
+    <div class="media-box">
+      <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
+        <div class="media-body">
+          <h4>This is the title</h4>
+          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="media-box">
+      <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" src="http://placehold.it/64x64"></a>
+        <div class="media-body">
+          <h4>This is the title</h4>
+          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="span4">
+    <div ng-show="isLoggedIn()">
+      <input class="span4" type="text" data-ng-model="form.professor" placeholder="Your Professor" data-provide="typeahead" data-source='["McCully", "Lee", "Jain", "Test", "Awesome", "Zebra", "Abhi", "Jess", "Bag"]'>
+      <textarea class="span4" rows="8" data-ng-model="form.comments" placeholder="Your comments on the Course"></textarea>
+      <select class="span4" data-ng-model="form.term">
+        <option value="w2013" selected>Winter 2013</option>
+        <option value="f2012">Fall 2012</option>
+        <option value="s2012">Summer 2012</option>
+        <option value="w2012">Winter 2012</option>
+        <option value="f2011">Fall 2011</option>
+      </select>
+      <script>
+        $('#rate_course').raty({
+          cancel: false,
+          targetType: 'number',
+          targetKeep: true,
+          score: 3
+        });
+
+        $('#rate_prof').raty({
+          cancel: false,
+          targetType: 'number',
+          targetKeep: true,
+          score: 3
+        });
+      </script>
+      <hr>
+      Course rating:
+      <div id="rate_course"></div>
+
+      Prof Rating:
+      <div id="rate_prof"></div>
+
+      <span class="btn" ng-click="submitRating(form);">Create Rating</span>
+      <hr>
+      <pre>{{form}}</pre>
+    </div>
+    <div ng-hide="isLoggedIn()">
+      <p class="lead">Please log in to rate this course</p>
+    </div>
+  </div>
+</div>

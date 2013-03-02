@@ -21,6 +21,10 @@ function MainCtrl($scope, $rootScope) {
 
   //$scope.user = Parse.User.current();
   $rootScope.user = Parse.User.current();
+
+  $rootScope.isLoggedIn = function () {
+    return !!Parse.User.current();
+  };
 }
 MainCtrl.$inject = ['$scope', '$rootScope'];
 
@@ -285,17 +289,22 @@ function UniversityCtrl($scope, $location) {
   console.log($location.path());
 
   var Courses = Parse.Object.extend("Courses");
+
   var query = new Parse.Query(Courses);
+
   query.equalTo("university", $location.path().substring(1));
+
   query.find({
     success: function(results) {
-      console.log("Successfully retrieved " + results.length + " scores.");
+      console.log("Successfully retrieved " + results.length + " courses.");
 
       var jsonArray = [];
 
       for (var i = 0; i < results.length; i++) {
         jsonArray.push(results[i].toJSON());
       }
+
+      console.log(jsonArray);
 
       $scope.courses = jsonArray;
 
@@ -307,3 +316,88 @@ function UniversityCtrl($scope, $location) {
   });
 }
 UniversityCtrl.$inject = ['$scope', '$location'];
+
+
+/*
+ *  Courses
+ */
+function CoursesCtrl($scope, $location, $routeParams) {
+  var course;
+  // init
+  $scope.form = {
+    term: "w2013"
+  };
+
+  $scope.submitRating = function (form) {
+    form.course_rating = $('#rate_course').raty('score');
+    form.prof_rating = $('#rate_prof').raty('score');
+
+    var Ratings = Parse.Object.extend("Ratings");
+    var rating = new Ratings();
+
+    rating.set("professor", form.professor);
+    rating.set("comments", form.comments);
+    rating.set("term", form.term);
+    rating.set("course_rating", form.course_rating);
+    rating.set("prof_rating", form.prof_rating);
+    rating.set("createdBy", Parse.User.current());
+    rating.set("course", $routeParams.courseid);
+
+    rating.save(null, {
+      success: function(rating) {
+        // The object was saved successfully.
+        console.log(rating);
+      },
+      error: function(rating, error) {
+        // The save failed.
+        // error is a Parse.Error with an error code and description.
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  };
+
+  // query
+  console.log($location.path());
+  console.log($routeParams);
+
+  var Courses = Parse.Object.extend("Courses");
+  var query = new Parse.Query(Courses);
+  query.equalTo("objectId", $routeParams.courseid);
+  query.find({
+    success: function(results) {
+      console.log("Successfully retrieved " + results.length + " course.");
+      console.log(results[0].toJSON());
+      course = results[0];
+      $scope.course = results[0].toJSON();
+      $scope.$digest();
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+
+  var Ratings = Parse.Object.extend("Ratings");
+  var query2 = new Parse.Query(Ratings);
+  query2.equalTo("course", $routeParams.courseid);
+  query2.find({
+    success: function(results) {
+      console.log("Successfully retrieved " + results.length + " ratings.");
+      console.log(results);
+      $scope.ratings = results;
+      $scope.$digest();
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+
+}
+CoursesCtrl.$inject = ['$scope', '$location', '$routeParams'];
+
+/*
+ *  Rating
+ */
+// function RatingCtrl($scope, $routeParams) {
+//   console.log("RatingCtrl");
+// }
+// RatingCtrl.$inject = ['$scope', '$routeParams']
