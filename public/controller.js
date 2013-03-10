@@ -242,6 +242,20 @@ function CreateCourseCtrl($scope) {
       return alert('form is empty');
     }
 
+    else if (!form.courseTitle) {
+      return alert ("Please enter a course title");
+      //return $scope.hello = "Please enter a course title\n";
+    }
+
+    else if (!form.courseCode) {
+      return alert ("Please enter a course code");
+    }
+
+    else if (!form.courseNumber) {
+        return alert ("Please enter a course number");
+
+    }
+
     // Uppercase course code
     if (form.courseCode && typeof form.courseCode == "string") {
       form.courseCode = form.courseCode.toUpperCase();
@@ -334,6 +348,14 @@ function CoursesCtrl($scope, $location, $routeParams) {
 
     var Ratings = Parse.Object.extend("Ratings");
     var rating = new Ratings();
+
+    if (!form.professor) {
+      return alert("Please enter a professor name");
+    }
+
+    if(form.comments.length > 1000){
+      return alert ("Please enter comments under 1000 characters in length");
+    }
 
     rating.set("professor", form.professor);
     rating.set("comments", form.comments);
