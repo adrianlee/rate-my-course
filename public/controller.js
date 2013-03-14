@@ -430,7 +430,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
         var rating = results[i].toJSON();
         rating.createdBy = results[i].attributes.createdBy.toJSON();
         rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim()) + "?d=mm";
-        rating.timestamp = new Date(results[i].createdAt);
+        rating.timestamp = moment(new Date(results[i].createdAt)).fromNow();
         jsonArray.push(rating);
       }
 
