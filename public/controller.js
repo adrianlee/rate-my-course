@@ -232,7 +232,6 @@ TestCtrl.$inject = ['$scope', '$rootScope', '$location'];
 function CreateCourseCtrl($scope) {
   var current_user = Parse.User.current();
 
-  console.log("test");
 
   $scope.submit = function(form) {
     // Validation Login
@@ -280,16 +279,33 @@ function CreateCourseCtrl($scope) {
     keywords.push(form.courseCode + " " + form.courseNumber);
     course.set("keywords", keywords);
 
-    course.save(null, {
-      success: function(comment) {
-        // The object was saved successfully.
-        alert(JSON.stringify(comment));
+
+    var query = new Parse.Query(Courses);
+    query.equalTo("code", form.courseCode);
+    query.equalTo("number", form.courseNumber);
+    query.find({
+      success: function(results) {
+
+
+        if (results.length == 0) {
+          course.save(null, {
+            success: function(comment) {
+              // The object was saved successfully.
+              alert(form.courseCode + form.courseNumber + " - " + form.courseTitle + " - Successfully Created");
+            },
+            error: function(comment, error) {
+              // The save failed.
+              // error is a Parse.Error with an error code and description.
+              alert(JSON.stringify(comment));
+              alert(JSON.stringify(error));
+            }
+          });
+        } else {
+          alert("Course already exists!");
+        }
       },
-      error: function(comment, error) {
-        // The save failed.
-        // error is a Parse.Error with an error code and description.
-        alert(JSON.stringify(comment));
-        alert(JSON.stringify(error));
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
       }
     });
  }
