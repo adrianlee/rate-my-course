@@ -422,17 +422,26 @@ function CoursesCtrl($scope, $location, $routeParams) {
   query2.find({
     success: function(results) {
       console.log("Successfully retrieved " + results.length + " ratings.");
-      console.log(results);
+      // console.log(results);
 
       var jsonArray = [];
 
       for (var i = 0; i < results.length; i++) {
         var rating = results[i].toJSON();
+        var deletable = false;
+
+        if (results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
+          deletable = true;
+        }
+
+        rating.deletable = deletable;
         rating.createdBy = results[i].attributes.createdBy.toJSON();
         rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim()) + "?d=mm";
         rating.timestamp = moment(new Date(results[i].createdAt)).fromNow();
         jsonArray.push(rating);
       }
+
+      console.log(jsonArray);
 
       $scope.ratings = jsonArray;
       $scope.$digest();
@@ -442,6 +451,39 @@ function CoursesCtrl($scope, $location, $routeParams) {
     }
   });
 
+  $scope.delete = function (rating) {
+    console.log("delete");
+    console.log(rating.objectId);
+    var r = confirm("Are you sure you want to delete your comment?");
+
+    if (r) {
+      var query3 = new Parse.Query(Ratings);
+      query3.get(rating.objectId, {
+        success: function(doc) {
+          console.log(doc);
+          if (doc) {
+            doc.destroy({
+              success: function(myObject) {
+                // The object was deleted from the Parse Cloud.
+                console.log(myObject);
+                window.location.reload();
+              },
+              error: function(myObject, error) {
+                // The delete failed.
+                // error is a Parse.Error with an error code and description.
+                alert(JSON.stringify(error));
+              }
+            });
+          }
+        },
+        error: function(object, error) {
+          // The object was not retrieved successfully.
+          // error is a Parse.Error with an error code and description.
+          alert(JSON.stringify(error));
+        }
+      });
+    }
+  };
 }
 CoursesCtrl.$inject = ['$scope', '$location', '$routeParams'];
 
