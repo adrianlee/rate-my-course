@@ -318,6 +318,27 @@ CreateCourseCtrl.$inject = ['$scope'];
 function UniversityCtrl($scope, $location) {
   console.log($location.path());
 
+  function getRating(results, i) {
+    return function (cb) {
+      var Ratings = Parse.Object.extend("Ratings");
+      var query = new Parse.Query(Ratings);
+
+      query.equalTo('course', results[i].toJSON().objectId);
+
+      query.find({
+        success: function(list) {
+          var result = results[i].toJSON();
+          var a = [];
+          for (var j = 0; j < list.length; j++) {
+            a.push(list[j].attributes.professor);
+          }
+          result.profs = a;
+          cb(result);
+        }
+      });
+    }
+  }
+
   var Courses = Parse.Object.extend("Courses");
 
   var query = new Parse.Query(Courses);
@@ -329,10 +350,16 @@ function UniversityCtrl($scope, $location) {
       console.log("Successfully retrieved " + results.length + " courses.");
 
       var jsonArray = [];
+      var result = null;
 
       for (var i = 0; i < results.length; i++) {
-        jsonArray.push(results[i].toJSON());
+        getRating(results, i)(function (result) {
+          console.log(result);
+          jsonArray.push(result);
+          $scope.$digest();
+        });
       }
+
 
       console.log(jsonArray);
 
