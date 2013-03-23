@@ -34,7 +34,7 @@
             </td>
             <td>
                 <p>
-                    <a class="btn btn-primary" onclick="window.delete('{{some_user.objectId}}')">{{some_user.objectId}}</a>
+                    <a class="btn btn-primary" onclick="window.delete('{{some_user.objectId}}')">DELETE {{some_user.username}}</a>
                 </p>
             </td>
         </tr>
@@ -50,6 +50,7 @@
         url: "/delete/" + id
       }).done(function( msg ) {
         alert( "Data deleted: " + msg );
+        location.reload(true);
       });
     }
   }

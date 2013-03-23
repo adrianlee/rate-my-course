@@ -10,7 +10,7 @@
       <div class="media">
         <a class="pull-left" href="#"><img class="media-object" ng-src="{{rating.image}}"></a>
         <div class="media-body">
-          <h4>Rating by {{rating.createdBy.username}} on {{rating.timestamp}}</h4>
+          <h4>Rating by {{rating.createdBy.username}} {{rating.timestamp}}</h4>
           <div class="row-fluid">
             <div class="span6">
               <p>Term: {{rating.term}}<br> Professor: {{rating.professor}}</p>
@@ -38,6 +38,14 @@
         <option value="s2012">Summer 2012</option>
         <option value="w2012">Winter 2012</option>
         <option value="f2011">Fall 2011</option>
+        <option value="s2011">Summer 2011</option>
+        <option value="w2011">Winter 2011</option>
+        <option value="f2010">Fall 2010</option>
+        <option value="s2010">Summer 2010</option>
+        <option value="w2010">Winter 2010</option>
+        <option value="f2009">Fall 2009</option>
+        <option value="s2009">Summer 2009</option>
+        <option value="w2009">Winter 2009</option>
       </select>
       <script>
         $('#rate_course').raty({

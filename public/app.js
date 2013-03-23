@@ -91,16 +91,19 @@ App.filter('capitalize', function() {
 
 App.filter('professor_list3', function() {
   return function(input, scope) {
-    console.log(input);
-    if (input) {
-      if (input.length > 3) {
-        return (input[0] || "") + " " + (input[1] || "") + " " + (input[2] || "") + "...";
-      } else if (input.length = 3) {
-        return (input[0] || "") + " " + (input[1] || "") + " " + (input[2] || "");
-      } else if (input.length = 2) {
-        return (input[0] || "") + " " + (input[1] || "");
-      } else if (input.length = 1) {
-        return (input[0] || "");
+
+    var my_input = _.compact(_.uniq(input));
+
+    console.log(my_input);
+    if (my_input) {
+      if (my_input.length > 3) {
+        return (my_input[0] || "") + " " + (my_input[1] || "") + " " + (my_input[2] || "") + " ...";
+      } else if (my_input.length = 3) {
+        return (my_input[0] || "") + " " + (my_input[1] || "") + " " + (my_input[2] || "");
+      } else if (my_input.length = 2) {
+        return (my_input[0] || "") + " " + (my_input[1] || "");
+      } else if (my_input.length = 1) {
+        return (my_input[0] || "");
       } else {
         return;
       }
