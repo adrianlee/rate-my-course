@@ -555,14 +555,20 @@ UsersCtrl.$inject = ['$scope', '$routeParams']
 
 function EditCtrl($scope, $routeParams) {
   console.log("EditCtrl");
-  var currentUser = Parse.User.current();
 
-  $scope.submit = function(user){
+    $scope.currentUser = Parse.User.current();
+  $scope.edit = function(newUser){
+
+    var currentUser = Parse.User.current();
     console.log("Were in here");
-    console.log(user);
-    if (user.username){
-      return("There is a username");
+   // console.log(user);
+    console.log(currentUser.username);
+    if (newUser.username){
+console.log("There is username");
       //currentUser.set("username", user.username)
+    }
+    else{
+      console.log("There is no username");
     }
   }
 }
