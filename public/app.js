@@ -94,7 +94,6 @@ App.filter('professor_list3', function() {
 
     var my_input = _.compact(_.uniq(input));
 
-    console.log(my_input);
     if (my_input) {
       if (my_input.length > 3) {
         return (my_input[0] || "") + " " + (my_input[1] || "") + " " + (my_input[2] || "") + " ...";
