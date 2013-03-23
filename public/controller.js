@@ -548,7 +548,7 @@ function UsersCtrl($scope, $routeParams) {
       for (var i = 0; i < docs.length; i++) {
         array.push(docs[i].toJSON());
       }
-      console.log(array);
+
       $scope.users_array = array;
       $scope.$digest();
     }
