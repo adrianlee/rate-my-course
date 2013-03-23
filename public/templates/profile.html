@@ -5,14 +5,14 @@
     <form>
       <fieldset>
        <!-- <input type="text" placeholder="Username" data-ng-model="user.username" /> -->
-       <input type="text" placeholder="Username" data-ng-model="user.username" value="{{currentUser.attributes.username}}" />
-        <input type="text" placeholder="Email" data-ng-model="user.email" value="{{currentUser.attributes.email}}" />
-        <input type="password" placeholder="Password" data-ng-model="user.password" value="{{currentUser.attributes.password}}" />
-        <input type="password" placeholder="Re-enter Password" data-ng-model="user.password2" value="{{currentUser.attributes.password}}" />
+       <input type="text" placeholder="Username" data-ng-model="newuser.username" ng-value="{{currentUser.username}}" />
+        <input type="text" placeholder="Email" data-ng-model="newuser.email" ng-value="{{currentUser.email}}" />
+        <input type="password" placeholder="Password" data-ng-model="newuser.password" ng-value="{{currentUser.password}}" />
+        <input type="password" placeholder="Re-enter Password" data-ng-model="newuser.password2" ng-value="{{currentUser.password}}" />
       </fieldset>
 
 
-      <button class="btn btn-primary" data-ng-click="edit(user)">Save Changes</button>
+      <button class="btn btn-primary" data-ng-click="edit(newuser)">Save Changes</button>
     </form>
   </div>
 </div>

@@ -18,7 +18,7 @@ function MainCtrl($scope, $rootScope) {
     $scope.$digest();
   });
 
-  $scope.isLoggedIn = !!Parse.User.current();
+  $scope.isLoggedIn = !! Parse.User.current();
 
   if (Parse.User.current()) {
     $scope.isAdmin = (Parse.User.current().attributes.username == "admin");
@@ -31,7 +31,7 @@ function MainCtrl($scope, $rootScope) {
   //$scope.user = Parse.User.current();
   $rootScope.user = Parse.User.current();
 
-  $rootScope.isLoggedIn = function () {
+  $rootScope.isLoggedIn = function() {
     return !!Parse.User.current();
   };
 }
@@ -40,6 +40,7 @@ MainCtrl.$inject = ['$scope', '$rootScope'];
 /*
  *  HEADER
  */
+
 function HeaderCtrl($scope, $rootScope) {
   if ($scope.isLoggedIn) {
     var email = Parse.User.current().attributes.email;
@@ -52,6 +53,7 @@ HeaderCtrl.$inject = ['$scope', '$rootScope'];
 /*
  *  HOME
  */
+
 function HomeCtrl($scope) {
 
 }
@@ -61,6 +63,7 @@ HomeCtrl.$inject = ['$scope'];
 /*
  *  REGISTER
  */
+
 function RegisterCtrl($scope, $rootScope, $location) {
   $scope.submit = function(newUser) {
     if (!newUser) {
@@ -74,7 +77,7 @@ function RegisterCtrl($scope, $rootScope, $location) {
     if (newUser.username)
 
     var user = new Parse.User();
-    if ((newUser.username.length) > 32){
+    if ((newUser.username.length) > 32) {
 
       return alert("Username length has to be lower than 32 characters");
 
@@ -82,7 +85,7 @@ function RegisterCtrl($scope, $rootScope, $location) {
 
     user.set("username", newUser.username);
 
-    if (((newUser.password.length) > 32)|| (newUser.password.length) < 8) {
+    if (((newUser.password.length) > 32) || (newUser.password.length) < 8) {
 
       return alert("Password length should be between 8 and 32 characters");
 
@@ -90,12 +93,12 @@ function RegisterCtrl($scope, $rootScope, $location) {
 
     user.set("password", newUser.password);
 
-    if (!newUser.email){
+    if (!newUser.email) {
 
       return alert("Email field left blank");
     }
 
-    if ((newUser.email.length) > 60){
+    if ((newUser.email.length) > 60) {
 
       return alert("Email length has to be lower than 60 characters");
     }
@@ -104,7 +107,7 @@ function RegisterCtrl($scope, $rootScope, $location) {
     var patt2 = /concordia.ca$/;
     var patt3 = /umontreal.ca$/;
 
-    if ( (!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email)) ){
+    if ((!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email))) {
 
       return alert("Please enter a valid university email");
     }
@@ -136,6 +139,7 @@ RegisterCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  LOGIN
  */
+
 function LoginCtrl($scope, $rootScope, $location) {
   $scope.submit = function(user) {
     if (!user) {
@@ -161,8 +165,9 @@ LoginCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Forgot
  */
+
 function ForgotCtrl($scope, $rootScope, $location) {
-  $scope.forgotPass = function (user) {
+  $scope.forgotPass = function(user) {
     console.log(user);
     // reset password reset
     Parse.User.requestPasswordReset(user.email, {
@@ -183,10 +188,10 @@ ForgotCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
 
 
-
 /*
  *  Logout
  */
+
 function LogoutCtrl($scope, $rootScope, $location) {
   $rootScope.$emit('logout');
 
@@ -204,13 +209,14 @@ LogoutCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Test
  */
+
 function TestCtrl($scope, $rootScope, $location) {
 
   var user1 = Parse.User.current();
   // var uniqueID = user1.get
   // console.log(user1);
 
-  $scope.submit =function(comment){
+  $scope.submit = function(comment) {
 
     var Comment = Parse.Object.extend("Comment");
     var comment2 = new Comment();
@@ -229,7 +235,7 @@ function TestCtrl($scope, $rootScope, $location) {
         alert(JSON.stringify(error));
       }
     });
- }
+  }
 }
 TestCtrl.$inject = ['$scope', '$rootScope', '$location'];
 
@@ -238,6 +244,7 @@ TestCtrl.$inject = ['$scope', '$rootScope', '$location'];
 /*
  *  Create Course
  */
+
 function CreateCourseCtrl($scope) {
   var current_user = Parse.User.current();
 
@@ -248,19 +255,13 @@ function CreateCourseCtrl($scope) {
     // Check if form is filled
     if (!form) {
       return alert('form is empty');
-    }
-
-    else if (!form.courseTitle) {
-      return alert ("Please enter a course title");
+    } else if (!form.courseTitle) {
+      return alert("Please enter a course title");
       //return $scope.hello = "Please enter a course title\n";
-    }
-
-    else if (!form.courseCode) {
-      return alert ("Please enter a course code");
-    }
-
-    else if (!form.courseNumber) {
-        return alert ("Please enter a course number");
+    } else if (!form.courseCode) {
+      return alert("Please enter a course code");
+    } else if (!form.courseNumber) {
+      return alert("Please enter a course number");
 
     }
 
@@ -317,18 +318,19 @@ function CreateCourseCtrl($scope) {
         alert("Error: " + error.code + " " + error.message);
       }
     });
- }
+  }
 }
 CreateCourseCtrl.$inject = ['$scope'];
 
 /*
  *  University
  */
+
 function UniversityCtrl($scope, $location) {
   console.log($location.path());
 
   function getRating(results, i) {
-    return function (cb) {
+    return function(cb) {
       var Ratings = Parse.Object.extend("Ratings");
       var query = new Parse.Query(Ratings);
 
@@ -362,7 +364,7 @@ function UniversityCtrl($scope, $location) {
       var result = null;
 
       for (var i = 0; i < results.length; i++) {
-        getRating(results, i)(function (result) {
+        getRating(results, i)(function(result) {
           console.log(result);
           jsonArray.push(result);
           $scope.$digest();
@@ -387,6 +389,7 @@ UniversityCtrl.$inject = ['$scope', '$location'];
 /*
  *  Courses
  */
+
 function CoursesCtrl($scope, $location, $routeParams) {
   var course;
   // init
@@ -394,7 +397,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
     term: "w2013"
   };
 
-  $scope.submitRating = function (form) {
+  $scope.submitRating = function(form) {
     form.course_rating = $('#rate_course').raty('score');
     form.prof_rating = $('#rate_prof').raty('score');
 
@@ -405,8 +408,8 @@ function CoursesCtrl($scope, $location, $routeParams) {
       return alert("Please enter a professor name");
     }
 
-    if(form.comments.length > 1000){
-      return alert ("Please enter comments under 1000 characters in length");
+    if (form.comments.length > 1000) {
+      return alert("Please enter comments under 1000 characters in length");
     }
 
     rating.set("professor", form.professor);
@@ -489,7 +492,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
     }
   });
 
-  $scope.delete = function (rating) {
+  $scope.delete = function(rating) {
     console.log("delete");
     console.log(rating.objectId);
     var r = confirm("Are you sure you want to delete your comment?");
@@ -542,7 +545,7 @@ function UsersCtrl($scope, $routeParams) {
   query.find({
     success: function(docs) {
       var array = [];
-      for ( var i = 0; i < docs.length; i++) {
+      for (var i = 0; i < docs.length; i++) {
         array.push(docs[i].toJSON());
       }
       console.log(array);
@@ -556,18 +559,26 @@ UsersCtrl.$inject = ['$scope', '$routeParams']
 function EditCtrl($scope, $routeParams) {
   console.log("EditCtrl");
 
-    $scope.currentUser = Parse.User.current();
-  $scope.edit = function(newUser){
+  $scope.currentUser = Parse.User.current().toJSON();
+  console.log($scope.currentUser);
+
+  $scope.newuser = {};
+  $scope.newuser.username = $scope.currentUser.username;
+  $scope.newuser.email = $scope.currentUser.email;
+
+  $scope.edit = function(newUser) {
 
     var currentUser = Parse.User.current();
-    console.log("Were in here");
-   // console.log(user);
-    console.log(currentUser.username);
-    if (newUser.username){
-console.log("There is username");
+
+    console.log("old user name");
+    console.log(currentUser.attributes.username);
+    console.log("new user name");
+    console.log(newUser.username);
+
+    if (newUser.username) {
+      console.log("There is username");
       //currentUser.set("username", user.username)
-    }
-    else{
+    } else {
       console.log("There is no username");
     }
   }
