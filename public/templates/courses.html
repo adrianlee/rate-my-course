@@ -11,8 +11,17 @@
         <a class="pull-left" href="#"><img class="media-object" ng-src="{{rating.image}}"></a>
         <div class="media-body">
           <h4>Rating by {{rating.createdBy.username}} on {{rating.timestamp}}</h4>
-          Course Rating: <img src="/stars/{{rating.course_rating}}.png" alt=""/>
-          Professor Rating: <img src="/stars/{{rating.prof_rating}}.png" alt=""/>
+          <div class="row-fluid">
+            <div class="span6">
+              <p>Term: {{rating.term}}<br> Professor: {{rating.professor}}</p>
+            </div>
+            <div class="span6">
+              <p>
+                Course Rating: <img src="/stars/{{rating.course_rating}}.png" alt=""/><br/>
+                Professor Rating: <img src="/stars/{{rating.prof_rating}}.png" alt=""/>
+              </p>
+            </div>
+          </div>
           <p>{{rating.comments}}</p>
           <a ng-click="delete(rating)"><small ng-show="rating.deletable">delete comment</small></a>
         </div>
