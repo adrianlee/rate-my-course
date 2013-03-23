@@ -27,6 +27,7 @@
       <th>Course Code</th>
       <th>Course Number</th>
       <th>Course Title</th>
+      <th>Course Profs</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,7 @@
         <td>{{course.code}}</td>
         <td>{{course.number}}</td>
         <td>{{course.title}}</td>
+        <td>{{course.profs | professor_list3}}</td>
     </tr>
   </tbody>
   <tbody id="courses">
