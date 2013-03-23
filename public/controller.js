@@ -552,3 +552,24 @@ function UsersCtrl($scope, $routeParams) {
   });
 }
 UsersCtrl.$inject = ['$scope', '$routeParams']
+
+function EditCtrl($scope, $routeParams) {
+  console.log("EditCtrl");
+
+    $scope.currentUser = Parse.User.current();
+  $scope.edit = function(newUser){
+
+    var currentUser = Parse.User.current();
+    console.log("Were in here");
+   // console.log(user);
+    console.log(currentUser.username);
+    if (newUser.username){
+console.log("There is username");
+      //currentUser.set("username", user.username)
+    }
+    else{
+      console.log("There is no username");
+    }
+  }
+}
+EditCtrl.$inject = ['$scope', '$routeParams']

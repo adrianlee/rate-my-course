@@ -39,6 +39,11 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : ForgotCtrl
   });
 
+  $routeProvider.when('/profile', {
+    templateUrl : '/templates/profile.html',
+    controller : EditCtrl
+  });
+
   $routeProvider.when('/courses/:courseid', {
     templateUrl : '/templates/courses.html',
     controller : CoursesCtrl
