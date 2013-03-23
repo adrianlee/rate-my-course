@@ -1,4 +1,5 @@
 var express = require('express'),
+    request = require('request'),
     app = express();
 
 ////////////////////////////////////////////////
@@ -18,6 +19,25 @@ app.use(express.errorHandler());
 
 app.get('/', function(req, res) {
   res.sendfile(__dirname + '/public/templates/index.html');
+});
+
+
+app.post('/delete/:user', function(req, res) {
+  console.log(req.param('user'));
+
+  var options = {
+    method: "delete",
+    url: "https://api.parse.com/1/users/" + req.param('user'),
+    headers: {
+      "X-Parse-Application-Id": "mWF6nv6fLZx5l0FOYW8SSxfE07fcA4kMHPfl2UzR",
+      'X-Parse-Master-Key': 'd23P2aFJ1nYQMYZeXmC4ryMSXfL4PhwUPEs9S3jv'
+    }
+  }
+
+  request(options, function (err, res, body) {
+    console.log(err);
+    console.log(body);
+  });
 });
 
 ////////////////////////////////////////////////

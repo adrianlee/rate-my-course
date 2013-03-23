@@ -1,40 +1,56 @@
-<table>
-  <thead>
-    <tr>
-      <th width="200">User Name</th>
-      <th width="150">Email</th>
-      <th width="150">Verification</th>
-      <th>Delete User</th>
-	  </tr>
-  </thead>
- 
-  <tbody>
-    <tr>
-    
-      <td><div ng-repeat="some_user in users_array">
- 		 <p>{{some_user.username}}</p>
-		</div>
-	  </td>
-    
-      <td> 
-     	 <div ng-repeat="some_user in users_array">
- 		 <p>{{some_user.email}}</p>
-		 </div>
-	   </td>
- 	
- 	   <td> <div ng-repeat="some_user in users_array">
- 		 <p>{{some_user.emailVerified}}</p>
-		 </div> 
-	    </td>
-
-  	   <td> <div ng-repeat="some_user in users_array">
- 		 <p>{{some_user.emailVerified}}</p>
-		 </div> 
-	   </td>
-   
-    </tr>
-  </tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Verification
+            </th>
+            <th>
+                Delete User
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="some_user in users_array">
+            <td>
+                <p>
+                    {{some_user.username}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{some_user.email}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{some_user.emailVerified}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    <a class="btn btn-primary" onclick="window.delete('{{some_user.objectId}}')">{{some_user.objectId}}</a>
+                </p>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
-
-
+<script>
+  window.delete = function(id) {
+    console.log(id);
+    if (id) {
+      $.ajax({
+        type: "post",
+        url: "/delete/" + id
+      }).done(function( msg ) {
+        alert( "Data deleted: " + msg );
+      });
+    }
+  }
+</script>
