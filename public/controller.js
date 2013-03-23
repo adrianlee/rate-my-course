@@ -13,11 +13,20 @@ function MainCtrl($scope, $rootScope) {
   $rootScope.$on('login', function() {  
     console.log('HeaderCtrl: Logged In');
     $scope.isLoggedIn = true;
+    $scope.isAdmin = (Parse.User.current().attributes.username == "admin");
     $rootScope.user = Parse.User.current();
     $scope.$digest();
   });
 
   $scope.isLoggedIn = !!Parse.User.current();
+
+  if (Parse.User.current()) {
+    $scope.isAdmin = (Parse.User.current().attributes.username == "admin");
+  }
+
+  console.log("Parse.User.current()");
+  // console.log(Parse.User.current().attributes.username);
+
 
   //$scope.user = Parse.User.current();
   $rootScope.user = Parse.User.current();
@@ -521,3 +530,23 @@ CoursesCtrl.$inject = ['$scope', '$location', '$routeParams'];
 //   console.log("RatingCtrl");
 // }
 // RatingCtrl.$inject = ['$scope', '$routeParams']
+
+function UsersCtrl($scope, $routeParams) {
+  console.log("UsersCtrl");
+
+  var User = Parse.Object.extend("User");
+  var query = new Parse.Query(User);
+
+  query.find({
+    success: function(docs) {
+      var array = [];
+      for ( var i = 0; i < docs.length; i++) {
+        array.push(docs[i].toJSON());
+      }
+      console.log(array);
+      $scope.users_array = array;
+      $scope.$digest();
+    }
+  });
+}
+UsersCtrl.$inject = ['$scope', '$routeParams']

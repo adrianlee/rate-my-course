@@ -44,6 +44,10 @@ App.config(['$routeProvider', function($routeProvider) {
     controller : CoursesCtrl
   });
 
+  $routeProvider.when('/users', {
+    templateUrl : '/templates/users.html',
+    controller : UsersCtrl
+  });
   // $routeProvider.when('/courses/:courseid/create', {
   //   templateUrl : '/templates/rating.html',
   //   controller : RatingCtrl

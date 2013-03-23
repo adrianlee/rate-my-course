@@ -1,0 +1,40 @@
+<table>
+  <thead>
+    <tr>
+      <th width="200">User Name</th>
+      <th width="150">Email</th>
+      <th width="150">Verification</th>
+      <th>Delete User</th>
+	  </tr>
+  </thead>
+ 
+  <tbody>
+    <tr>
+    
+      <td><div ng-repeat="some_user in users_array">
+ 		 <p>{{some_user.username}}</p>
+		</div>
+	  </td>
+    
+      <td> 
+     	 <div ng-repeat="some_user in users_array">
+ 		 <p>{{some_user.email}}</p>
+		 </div>
+	   </td>
+ 	
+ 	   <td> <div ng-repeat="some_user in users_array">
+ 		 <p>{{some_user.emailVerified}}</p>
+		 </div> 
+	    </td>
+
+  	   <td> <div ng-repeat="some_user in users_array">
+ 		 <p>{{some_user.emailVerified}}</p>
+		 </div> 
+	   </td>
+   
+    </tr>
+  </tbody>
+</table>
+
+
+
