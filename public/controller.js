@@ -466,8 +466,10 @@ function CoursesCtrl($scope, $location, $routeParams) {
         var rating = results[i].toJSON();
         var deletable = false;
 
-        if (results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
-          deletable = true;
+        if (Parse.User.current()) {
+          if (results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
+            deletable = true;
+          }
         }
 
         rating.deletable = deletable;
