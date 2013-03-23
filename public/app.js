@@ -83,3 +83,24 @@ App.filter('capitalize', function() {
     }
   }
 });
+
+App.filter('professor_list3', function() {
+  return function(input, scope) {
+    console.log(input);
+    if (input) {
+      if (input.length > 3) {
+        return (input[0] || "") + " " + (input[1] || "") + " " + (input[2] || "") + "...";
+      } else if (input.length = 3) {
+        return (input[0] || "") + " " + (input[1] || "") + " " + (input[2] || "");
+      } else if (input.length = 2) {
+        return (input[0] || "") + " " + (input[1] || "");
+      } else if (input.length = 1) {
+        return (input[0] || "");
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+});
