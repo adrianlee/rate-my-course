@@ -577,10 +577,47 @@ function EditCtrl($scope, $routeParams) {
 
     if (newUser.username) {
       console.log("There is username");
-      //currentUser.set("username", user.username)
-    } else {
-      console.log("There is no username");
+      if ((newUser.username.length) > 32) {
+        return alert("Username length has to be lower than 32 characters");
+      }
+      currentUser.set("username", newUser.username)  
     }
+
+    
+
+    if (newUser.password){
+      if (((newUser.password.length) > 32) || (newUser.password.length) < 8) {
+        return alert("Password length should be between 8 and 32 characters");
+      }
+
+      if (newUser.password != newUser.password2) {
+        return alert("Password do not match");
+      }
+
+    currentUser.set("password", newUser.password);
+
+    }
+
+   if (newUser.email) {
+
+    if ((newUser.email.length) > 60) {
+
+      return alert("Email length has to be lower than 60 characters");
+    }
+
+    var patt = /mcgill.ca$/;
+    var patt2 = /concordia.ca$/;
+    var patt3 = /umontreal.ca$/;
+
+    if ((!patt.test(newUser.email)) && (!patt2.test(newUser.email)) && (!patt3.test(newUser.email))) {
+
+      return alert("Please enter a valid university email");
+    }
+
+    currentUser.set("email", newUser.email);
+    }
+    currentUser.save();
   }
+  //currentUser.save();
 }
 EditCtrl.$inject = ['$scope', '$routeParams']
