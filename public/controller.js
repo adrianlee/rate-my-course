@@ -471,16 +471,19 @@ function CoursesCtrl($scope, $location, $routeParams) {
         var deletable = false;
 
         if (Parse.User.current()) {
-          if (results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
+          if (results[i].attributes.createdBy && results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
             deletable = true;
           }
         }
 
         // console.log(results[i]);
         rating.deletable = deletable;
-        if (results[i].attributes.createdBy){
+        if (results[i].attributes.createdBy) {
           rating.createdBy = results[i].attributes.createdBy.toJSON();
           rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim()) + "?d=mm";
+        } else {
+          rating.createdBy = {username: "unknown"};
+          rating.image = "http://www.gravatar.com/avatar/306217f487bb8e5fa6acb33e30e8f34a?d=mm";
         }
         rating.timestamp = moment(new Date(results[i].createdAt)).fromNow();
         jsonArray.push(rating);
@@ -621,6 +624,7 @@ function EditCtrl($scope, $routeParams) {
     currentUser.set("email", newUser.email);
     }
     currentUser.save();
+    $scope.currentUser = Parse.User.current().toJSON();
     window.location.reload();
   }
   //currentUser.save();
