@@ -34,9 +34,10 @@ app.post('/delete/:user', function(req, res) {
     }
   }
 
-  request(options, function (err, res, body) {
+  request(options, function (err, r, body) {
     console.log(err);
     console.log(body);
+    res.send(200);
   });
 });
 

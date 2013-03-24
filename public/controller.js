@@ -6,6 +6,7 @@ function MainCtrl($scope, $rootScope) {
   $rootScope.$on('logout', function() {
     console.log('HeaderCtrl: Logged Out');
     $scope.isLoggedIn = false;
+    $scope.isAdmin = false;
     $rootScope.user = Parse.User.current();
     $scope.$digest();
   });
@@ -444,7 +445,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
   query.find({
     success: function(results) {
       console.log("Successfully retrieved " + results.length + " course.");
-      console.log(results[0].toJSON());
+      // console.log(results[0].toJSON());
       course = results[0];
       $scope.course = results[0].toJSON();
       $scope.$digest();
@@ -475,9 +476,12 @@ function CoursesCtrl($scope, $location, $routeParams) {
           }
         }
 
+        // console.log(results[i]);
         rating.deletable = deletable;
-        rating.createdBy = results[i].attributes.createdBy.toJSON();
-        rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim()) + "?d=mm";
+        if (results[i].attributes.createdBy){
+          rating.createdBy = results[i].attributes.createdBy.toJSON();
+          rating.image = 'http://www.gravatar.com/avatar/' + md5(results[i].attributes.createdBy.attributes.email.toLowerCase().trim()) + "?d=mm";
+        }
         rating.timestamp = moment(new Date(results[i].createdAt)).fromNow();
         jsonArray.push(rating);
       }
@@ -580,10 +584,10 @@ function EditCtrl($scope, $routeParams) {
       if ((newUser.username.length) > 32) {
         return alert("Username length has to be lower than 32 characters");
       }
-      currentUser.set("username", newUser.username)  
+      currentUser.set("username", newUser.username)
     }
 
-    
+
 
     if (newUser.password){
       if (((newUser.password.length) > 32) || (newUser.password.length) < 8) {
@@ -617,6 +621,7 @@ function EditCtrl($scope, $routeParams) {
     currentUser.set("email", newUser.email);
     }
     currentUser.save();
+    window.location.reload();
   }
   //currentUser.save();
 }

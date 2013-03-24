@@ -50,7 +50,7 @@
         url: "/delete/" + id
       }).done(function( msg ) {
         alert( "Data deleted: " + msg );
-        location.reload(true);
+        window.location.reload();
       });
     }
   }
