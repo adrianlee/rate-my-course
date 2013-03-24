@@ -625,6 +625,7 @@ function EditCtrl($scope, $routeParams) {
     }
     currentUser.save();
     $scope.currentUser = Parse.User.current().toJSON();
+    $scope.$digest();
     window.location.reload();
   }
   //currentUser.save();
