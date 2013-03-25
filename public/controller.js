@@ -474,6 +474,10 @@ function CoursesCtrl($scope, $location, $routeParams) {
           if (results[i].attributes.createdBy && results[i].attributes.createdBy.toJSON().objectId == Parse.User.current().id) {
             deletable = true;
           }
+
+          if (Parse.User.current().toJSON().username == "admin") {
+            deletable = true;
+          }
         }
 
         // console.log(results[i]);
