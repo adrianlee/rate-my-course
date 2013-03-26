@@ -409,7 +409,7 @@ function CoursesCtrl($scope, $location, $routeParams) {
       return alert("Please enter a professor name");
     }
 
-    if (form.comments.length > 1000) {
+    if (!form.comments || form.comments.length > 1000) {
       return alert("Please enter comments under 1000 characters in length");
     }
 
