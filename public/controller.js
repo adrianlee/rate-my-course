@@ -567,7 +567,7 @@ function UsersCtrl($scope, $routeParams) {
 }
 UsersCtrl.$inject = ['$scope', '$routeParams']
 
-function EditCtrl($scope, $routeParams) {
+function EditCtrl($scope, $routeParams, $location, $rootScope) {
   console.log("EditCtrl");
 
   $scope.currentUser = Parse.User.current().toJSON();
@@ -576,6 +576,30 @@ function EditCtrl($scope, $routeParams) {
   $scope.newuser = {};
   $scope.newuser.username = $scope.currentUser.username;
   $scope.newuser.email = $scope.currentUser.email;
+
+  $scope.delete = function() {
+    var r = confirm("Are you sure you want to delete your account?");
+
+    if (r) {
+      var user = Parse.User.current();
+      console.log(user.id);
+      $.ajax({
+        type: "post",
+        url: "/delete/" + user.id
+      }).done(function( msg ) {
+        alert( "User deleted: " + msg );
+        // $rootScope.$emit('logout');
+
+        Parse.User.logOut();
+
+        if (!Parse.User.current()) {
+          $location.path('/').replace();
+          $rootScope.$digest();
+          window.location.reload();
+        };
+      });
+    }
+  }
 
   $scope.edit = function(newUser) {
 
@@ -634,4 +658,4 @@ function EditCtrl($scope, $routeParams) {
   }
   //currentUser.save();
 }
-EditCtrl.$inject = ['$scope', '$routeParams']
+EditCtrl.$inject = ['$scope', '$routeParams', '$location', '$rootScope']
