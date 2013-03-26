@@ -30,7 +30,7 @@
   </div>
   <div class="span4">
     <div ng-show="isLoggedIn()">
-      <input class="span4" type="text" data-ng-model="form.professor" placeholder="Your Professor" data-provide="typeahead" data-source='["McCully", "Lee", "Jain", "Test", "Awesome", "Zebra", "Abhi", "Jess", "Bag"]'>
+      <input class="span4" type="text" data-ng-model="form.professor" placeholder="Your Professor" data-provide="typeahead" data-source='{{prof_array}}'>
       <textarea class="span4" rows="8" data-ng-model="form.comments" placeholder="Your comments on the Course"></textarea>
       <select class="span4" data-ng-model="form.term">
         <option value="w2013" selected>Winter 2013</option>

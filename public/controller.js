@@ -455,6 +455,8 @@ function CoursesCtrl($scope, $location, $routeParams) {
     }
   });
 
+  $scope.prof_array = [];
+
   var Ratings = Parse.Object.extend("Ratings");
   var query2 = new Parse.Query(Ratings);
   query2.equalTo("course", $routeParams.courseid);
@@ -480,7 +482,11 @@ function CoursesCtrl($scope, $location, $routeParams) {
           }
         }
 
-        // console.log(results[i]);
+
+        console.log(results[i]);
+        $scope.prof_array.push(results[i].attributes.professor);
+
+
         rating.deletable = deletable;
         if (results[i].attributes.createdBy) {
           rating.createdBy = results[i].attributes.createdBy.toJSON();
